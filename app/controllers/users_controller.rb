@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :get_accounts, only: [:show]
+  before_action :get_organizations, only: [:index, :search, :edit, :new]
 
   # GET /users
   # GET /users.json
@@ -7,6 +9,15 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def search
+    if params['organization_id'] == 'All Orgs'
+      @users = User.all
+      render 'index'
+    else
+      @users = User.where(organization_id: params['organization_id'])
+      render 'index'
+    end
+  end
   # GET /users/1
   # GET /users/1.json
   def show
@@ -28,6 +39,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        @user.initialize_accounts
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -67,8 +79,15 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    def get_accounts
+      @user_accounts = @user.get_accounts
+    end
+
+    def get_organizations
+      @organizations_for_select = Organization.all.collect{|x| [x.name, x.id]}
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:login, :password, :admin, :Organization_id)
+      params.require(:user).permit(:first_name, :last_name, :login, :password, :admin, :organization_id)
     end
 end

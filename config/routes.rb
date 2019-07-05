@@ -1,9 +1,24 @@
 Rails.application.routes.draw do
   resources :transaction_types
   resources :transactions
-  resources :accounts
-  resources :users
   resources :organizations
+
+  resources :accounts do
+    collection do
+      get :transfer
+      post :execute_transfer
+      get :deposit
+      post :execute_deposit
+      get :expenditure
+      post :execute_expenditure
+    end
+  end
+
+  resources :users do
+    collection do
+      get :search
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

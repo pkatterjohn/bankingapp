@@ -27,6 +27,6 @@ end
 
 #Create Accounts for each User
 User.all.each do |user|
-
+  user.initialize_accounts
 end
 

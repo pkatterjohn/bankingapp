@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @user.first_name%> <%= @user.last_name%></h1>
 <p>
   <strong>Login:</strong>
   <%= @user.login %>
@@ -17,8 +18,12 @@
 
 <p>
   <strong>Organization:</strong>
-  <%= @user.organization %>
+  <%= @user.organization.name %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+
+<%= render(:partial => "user_accounts", :local => {:user => @user, :user_accounts => @user_accounts}) %>
+
+

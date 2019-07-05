@@ -1,6 +1,18 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
+  def transfer
+    render "transfer"
+  end
+
+  def deposit
+    render "deposit"
+  end
+
+  def expenditure
+    render "expenditure"
+  end
+
   # GET /accounts
   # GET /accounts.json
   def index
