@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @organization.name%></h1>
+
+<p>
+  <strong>External_Id:</strong>
+  <%= @organization.external_id %>
+</p>
+
+<p>
+  <strong>Number of Users:</strong>
+  <%= User.where(organization_id: @organization.id).count %>
+</p>
+
+<%= link_to 'Edit', edit_organization_path(@organization) %> |
+<%= link_to 'Back', organizations_path %>

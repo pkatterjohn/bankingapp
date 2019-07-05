@@ -5,3 +5,28 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+#Create Base Organizations
+Organization.create(name: 'Bank of Superior Access', external_id: 'superbank')
+Organization.create(name: 'Bank of Canada', external_id: 'canadabank')
+Organization.create(name: 'Bank of Germany', external_id: 'germanybank')
+Organization.create(name: 'Bank of Japan', external_id: 'japanbank')
+
+#Create SuperUser
+User.create(first_name: 'Philip', last_name: 'Katterjohn', admin: 2, login: 'superuser', password: 'byebuddy', organization_id: Organization.find_by_external_id('superbank').id)
+
+#Create Users for Organizations
+organizations = Organization.all
+users = (1..40).to_a
+organizations.each do |org|
+  users.take(10).each do |user|
+    User.create(first_name: "First#{user.to_s}", last_name: "Last#{user.to_s}", admin: 0, login: "User#{user.to_s}", password: "Password#{user.to_s}", organization_id: org.id)
+  end
+  users = users.drop(10)
+end
+
+#Create Accounts for each User
+User.all.each do |user|
+
+end
+
