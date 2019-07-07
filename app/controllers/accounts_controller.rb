@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  before_action :get_accounts, only: [:transfer, :deposit, :expenditure]
+  before_action :prepare_for_transaction, only: [:transfer, :deposit, :expenditure]
 
   def transfer
     render "transfer"
@@ -80,8 +80,10 @@ class AccountsController < ApplicationController
       @account = Account.find(params[:id])
     end
 
-    def get_accounts_for_select
-      @accounts_for_select = Account.where(user_id: current_user.id)
+    def prepare_for_transaction
+      @transaction = Transaction.new
+      @transaction_types_for_select = TransactionType.all.collect{|x| [x.type_name, x.type_name]}
+      @accounts_for_select = Account.where(user_id: current_user.id).collect{|x| ["#{x.name} - $#{x.amount} (Acct Num #{x.id})", x.id]}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

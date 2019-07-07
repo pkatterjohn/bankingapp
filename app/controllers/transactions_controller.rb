@@ -24,6 +24,12 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
+    # parameters = {
+    #   account_id: transaction_params['account_id'].to_i,
+    #   acct_from: transaction_params['acct_from'].to_i,
+    #   acct_to: transaction_params['acct_to'].to_i,
+    #   transaction_type: transaction_params['transaction_type'].to_i
+    # }
     @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|
@@ -69,6 +75,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:account_id, :transaction_type, :string)
+      params.require(:transaction).permit(:account_id, :transaction_type, :acct_from, :acct_to, :transfer_amount, :description)
     end
 end

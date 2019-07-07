@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user_home(user)
+      redirect_to home_user_path(user)
       #Log In User
     else
       #create error message

@@ -2,17 +2,27 @@
 
 <p>
   <strong>Account:</strong>
-  <%= @transaction.account %>
+  <%= @transaction.account.name %>
 </p>
 
 <p>
   <strong>Transaction type:</strong>
-  <%= @transaction.transaction_type %>
+  <%= @transaction.transaction_type%>
 </p>
 
 <p>
-  <strong>String:</strong>
-  <%= @transaction.string %>
+  <strong>Account From:</strong>
+  <%= Account.find(@transaction.acct_from).name %>
+</p>
+
+<p>
+  <strong>Account To:</strong>
+  <%= Account.find(@transaction.acct_to).name unless @transaction.acct_to.nil? %>
+</p>
+
+<p>
+  <strong>Transaction Amount:</strong>
+  $<%= '%.2f' % @transaction.transfer_amount%>
 </p>
 
 <%= link_to 'Edit', edit_transaction_path(@transaction) %> |

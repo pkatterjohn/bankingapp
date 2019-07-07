@@ -1,6 +1,10 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container">
-		<%= link_to "PKAT's Banking App", root_path, id: "logo" %>
+	  <% if logged_in? %>
+		  <%= link_to "PKAT's Banking App", home_user_path(current_user), id: "logo" %>
+    <%else%>
+		  <%= link_to "PKAT's Banking App", root_path, id: "logo" %>
+    <%end%>
 		<nav>
       <ul class="nav navbar-nav navbar-right">
 				<% if logged_in? %>
@@ -18,9 +22,9 @@
               User Menu <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Home", home_user_path%></li>
+                <li><%= link_to "Home", home_user_path(current_user)%></li>
                 <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Accounts", accounts_user_path %></li>
+                <li><%= link_to "Accounts", accounts_user_path(current_user) %></li>
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Log out", logout_path, method: :delete %>

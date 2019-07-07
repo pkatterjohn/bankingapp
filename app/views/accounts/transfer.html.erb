@@ -1,6 +1,50 @@
 <h1>Transfer Accounts</h1>
-<% form_for @transaction, url: {action: "create"} do |f| %>
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
 
-<%end%>
+      <ul>
+      <% @transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label>Accounts</label><br>
+    <%= f.select :account_id, @accounts_for_select, :include_blank => true %>
+  </div>
+
+  <div class="field">
+    <label>Transaction Type</label><br>
+    <%= f.text_field :transaction_type, :value => 'Transfer', :readonly => true%>
+  </div>
+
+  <div class="field">
+    <label>Account From</label><br>
+    <%= f.select :acct_from, @accounts_for_select, :include_blank => true %>
+  </div>
+
+  <div class="field">
+    <label>Account To</label><br>
+    <%= f.select :acct_to, @accounts_for_select, :include_blank => true %>
+  </div>
+
+  <div class="field">
+    <label>Amount to Transfer</label><br>
+    <%= f.number_field :transfer_amount, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <label>Description</label><br>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 

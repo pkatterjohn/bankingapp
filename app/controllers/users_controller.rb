@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :get_accounts, only: [:show]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :accounts]
+  before_action :get_accounts, only: [:accounts]
   before_action :get_organizations
 
   # GET /users
