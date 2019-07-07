@@ -1,12 +1,20 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :get_accounts, only: [:show]
-  before_action :get_organizations, only: [:index, :search, :edit, :new]
+  before_action :get_organizations
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+  end
+
+  def home
+
+  end
+
+  def accounts
+
   end
 
   def search
@@ -40,8 +48,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         @user.initialize_accounts
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        if current_user.id != @user.id
+          log_in @user
+          flash[:success] = "Welcome to the #{@user.organization.name}!"
+          format.html { redirect_to @user }
+        else
+          render '/users'
+        end
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -53,7 +66,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update_attributes(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else

@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :get_accounts, only: [:transfer, :deposit, :expenditure]
 
   def transfer
     render "transfer"
@@ -77,6 +78,10 @@ class AccountsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_account
       @account = Account.find(params[:id])
+    end
+
+    def get_accounts_for_select
+      @accounts_for_select = Account.where(user_id: current_user.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  root 'static_pages#home'
+
+	get '/home', to: 'static_pages#home'
+  get     '/login', to: 'sessions#new'
+  post    '/login', to: 'sessions#create'
+  delete  '/logout', to: 'sessions#destroy'
+
   resources :transaction_types
   resources :transactions
   resources :organizations
@@ -15,6 +23,10 @@ Rails.application.routes.draw do
   end
 
   resources :users do
+    member do
+      get :home
+      get :accounts
+    end
     collection do
       get :search
     end

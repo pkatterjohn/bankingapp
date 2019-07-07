@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190705152842) do
+ActiveRecord::Schema.define(version: 20190707193459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,19 +45,24 @@ ActiveRecord::Schema.define(version: 20190705152842) do
     t.string   "transaction_type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "acct_from",        null: false
+    t.integer  "acct_to"
+    t.float    "transfer_amount",  null: false
+    t.string   "description"
   end
 
   add_index "transactions", ["account_id"], name: "index_transactions_on_account_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "login"
-    t.string   "password"
     t.integer  "admin"
     t.integer  "organization_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "first_name",      null: false
     t.string   "last_name",       null: false
+    t.string   "password_digest"
+    t.string   "remember_digest"
   end
 
   add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
