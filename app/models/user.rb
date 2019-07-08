@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   belongs_to :organization
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
 
   def name
     (self.first_name + " " + self.last_name)
