@@ -1,2 +1,8 @@
 <h1>Greetings <%= current_user.name%>
+<br><br>
+<%= link_to 'View Profile', current_user %><br>
+<%= link_to 'View Accounts', accounts_user_path %><br>
+<%= link_to 'Transfer', transfer_accounts_path %><br>
+<%= link_to 'Deposit Money', deposit_accounts_path %><br>
+<%= link_to 'Spend Money', expenditure_accounts_path %><br>
 

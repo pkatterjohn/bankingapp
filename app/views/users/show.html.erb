@@ -1,14 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @user.first_name%> <%= @user.last_name%></h1>
+<h1><%= @user.name%></h1>
 <p>
   <strong>Login:</strong>
   <%= @user.login %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
 </p>
 
 <p>
@@ -22,8 +17,10 @@
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-
-<%# <%= render(:partial => "user_accounts", :local => {:user => @user, :user_accounts => @user_accounts}) %1> %>
+<% if current_user.admin > 0 %>
+  <%= link_to 'Back', users_path %>
+<%else%>
+  <%= link_to 'Accounts', accounts_user_path(current_user) %>
+<%end%>
 
 

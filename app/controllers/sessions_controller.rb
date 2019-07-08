@@ -2,6 +2,9 @@ class SessionsController < ApplicationController
   skip_before_filter :require_login
 
   def new
+    if logged_in?
+      redirect_to home_user_path(current_user)
+    end
   end
 
   def create

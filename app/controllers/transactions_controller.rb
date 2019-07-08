@@ -24,21 +24,22 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    # parameters = {
-    #   account_id: transaction_params['account_id'].to_i,
-    #   acct_from: transaction_params['acct_from'].to_i,
-    #   acct_to: transaction_params['acct_to'].to_i,
-    #   transaction_type: transaction_params['transaction_type'].to_i
-    # }
+    begin
     @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|
-      if @transaction.save
+      if @transaction.execute_save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
+    end
+    rescue RuntimeError => e
+      respond_to do |format|
+        flash[:error] = "Transaction failed to execute, #{e} "
+        format.html { redirect_to transfer_accounts_path }
       end
     end
   end
@@ -75,6 +76,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:account_id, :transaction_type, :acct_from, :acct_to, :transfer_amount, :description)
+      params.require(:transaction).permit(:user_id, :transaction_type, :acct_from, :acct_to, :transfer_amount, :description)
     end
 end

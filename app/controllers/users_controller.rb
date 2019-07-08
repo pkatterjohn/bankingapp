@@ -95,6 +95,7 @@ class UsersController < ApplicationController
 
     def get_accounts
       @user_accounts = @user.get_accounts
+      @user_transactions = @user.get_transactions
     end
 
     def get_organizations

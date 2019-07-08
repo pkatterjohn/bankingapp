@@ -1,4 +1,4 @@
-<h1>Spend Monies</h1>
+<h1>Spend Money</h1>
 <%= form_for(@transaction) do |f| %>
   <% if @transaction.errors.any? %>
     <div id="error_explanation">
@@ -13,17 +13,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :account_id %><br>
-    <%= f.text_field :account_id %>
+    <%= f.hidden_field :user_id, :value => current_user.id, :readonly => true%>
   </div>
-  <div class="hidden-field">
-    <%= f.hidden_field :transaction_type, value: 'Expenditure' %>
-  </div>
+
   <div class="field">
-    <%= f.label :string %><br>
-    <%= f.text_field :string %>
+    <label>Transaction Type</label><br>
+    <%= f.text_field :transaction_type, :value => 'Expenditure', :readonly => true%>
   </div>
+
+  <div class="field">
+    <label>Account From</label><br>
+    <%= f.select :acct_from, @accounts_for_select, :required => true %>
+  </div>
+
+  <div class="field">
+    <label>Amount to Spend</label><br>
+    <%= f.number_field :transfer_amount, step: 0.01, :required => true %>
+  </div>
+
+  <div class="field">
+    <label>Description</label><br>
+    <%= f.text_field :description %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+

@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     Account.where(user_id: self.id)
   end
 
+  def get_transactions
+    Transaction.where(user_id: self.id)
+  end
+
   #Initializes Accounts for New User
   def initialize_accounts
     sav_acct = Account.new(name: "#{self.first_name}'s Savings", user_id: self.id, account_type: "Savings", amount: 20.00)

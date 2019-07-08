@@ -5,32 +5,28 @@
 <table class="blueTable">
   <thead>
     <tr>
-      <th>Account</th>
+      <th>User</th>
       <th>Transaction type</th>
       <th>Account From</th>
       <th>Account To</th>
       <th>Description</th>
       <th>Amount</th>
-      <th colspan="2"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.account.name %></td>
+        <td><%= transaction.user.name unless transaction.user.nil? %></td>
         <td><%= transaction.transaction_type %></td>
-        <td><%= Account.find(transaction.acct_from).name%></td>
+        <td><%= Account.find(transaction.acct_from).name unless transaction.acct_from.nil?%></td>
         <td><%= Account.find(transaction.acct_to).name unless transaction.acct_to.nil?%></td>
         <td><%= transaction.description%></td>
         <td>$<%= '%.2f' % transaction.transfer_amount%></td>
         <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Transaction', new_transaction_path %>

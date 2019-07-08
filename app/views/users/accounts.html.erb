@@ -1,5 +1,12 @@
 <h1><%=@user.name%>'s Accounts</h1>
 
+<h2>
+  <%= link_to 'Transfer Money', transfer_accounts_path %>
+----
+  <%= link_to 'Deposit Money', deposit_accounts_path %>
+----
+  <%= link_to 'Spend Money', expenditure_accounts_path %>
+</h2>
 <table class="blueTable">
   <thead>
     <tr>
@@ -15,11 +22,33 @@
       <td><%=acct.id%></td>
       <td><%=acct.name%></td>
       <td><%=acct.account_type%></td>
-      <td>$<%=acct.amount%></td>
+      <td align="right">$<%= '%.2f' % acct.amount%></td>
     </tr>
   <%end%>
 </table>
 
-<%= link_to 'Transfer', transfer_accounts_path %>
-<%= link_to 'Deposit Money', deposit_accounts_path %>
-<%= link_to 'Spend Money', expenditure_accounts_path %>
+<h1>Account Transactions </h1>
+
+<table class="blueTable">
+  <thead>
+    <tr>
+      <th>Transaction type</th>
+      <th>Account From</th>
+      <th>Account To</th>
+      <th>Description</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= Account.find(transaction.acct_from).name unless transaction.acct_from.nil?%></td>
+        <td><%= Account.find(transaction.acct_to).name unless transaction.acct_to.nil?%></td>
+        <td><%= transaction.description%></td>
+        <td align="right">$<%= '%.2f' % transaction.transfer_amount%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

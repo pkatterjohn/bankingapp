@@ -13,8 +13,7 @@
   <% end %>
 
   <div class="field">
-    <label>Accounts</label><br>
-    <%= f.select :account_id, @accounts_for_select, :include_blank => true %>
+    <%= f.hidden_field :user_id, :value => current_user.id, :readonly => true%>
   </div>
 
   <div class="field">
@@ -24,17 +23,17 @@
 
   <div class="field">
     <label>Account From</label><br>
-    <%= f.select :acct_from, @accounts_for_select, :include_blank => true %>
+    <%= f.select :acct_from, @accounts_for_select, :required => true %>
   </div>
 
   <div class="field">
     <label>Account To</label><br>
-    <%= f.select :acct_to, @accounts_for_select, :include_blank => true %>
+    <%= f.select :acct_to, @accounts_for_select, :required => true %>
   </div>
 
   <div class="field">
     <label>Amount to Transfer</label><br>
-    <%= f.number_field :transfer_amount, step: 0.01 %>
+    <%= f.number_field :transfer_amount, step: 0.01 , :required => true%>
   </div>
 
   <div class="field">
@@ -44,6 +43,7 @@
 
   <div class="actions">
     <%= f.submit %>
+    <%= link_to 'Cancel Transaction', accounts_user_path(current_user)%>
   </div>
 <% end %>
 

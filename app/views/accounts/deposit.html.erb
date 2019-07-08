@@ -1,1 +1,44 @@
-<h1>Deposit Monies</h1>
+<h1>Deposit Money</h1>
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, :value => current_user.id, :readonly => true%>
+  </div>
+
+  <div class="field">
+    <label>Transaction Type</label><br>
+    <%= f.text_field :transaction_type, :value => 'Deposit', :readonly => true%>
+  </div>
+
+  <div class="field">
+    <label>Account To</label><br>
+    <%= f.select :acct_to, @accounts_for_select, :required => true %>
+  </div>
+
+  <div class="field">
+    <label>Amount to Deposit</label><br>
+    <%= f.number_field :transfer_amount, step: 0.01, :required => true %>
+  </div>
+
+  <div class="field">
+    <label>Description</label><br>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+

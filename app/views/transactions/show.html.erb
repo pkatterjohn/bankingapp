@@ -1,10 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Account:</strong>
-  <%= @transaction.account.name %>
-</p>
-
 <p>
   <strong>Transaction type:</strong>
   <%= @transaction.transaction_type%>
@@ -12,7 +5,7 @@
 
 <p>
   <strong>Account From:</strong>
-  <%= Account.find(@transaction.acct_from).name %>
+  <%= Account.find(@transaction.acct_from).name unless @transaction.acct_from.nil? %>
 </p>
 
 <p>
@@ -25,5 +18,5 @@
   $<%= '%.2f' % @transaction.transfer_amount%>
 </p>
 
-<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
-<%= link_to 'Back', transactions_path %>
+<br>
+<%= link_to 'Back To Accounts', accounts_user_path(current_user)%>
