@@ -31,6 +31,10 @@ User.all.each do |user|
   user.initialize_accounts
 end
 
+TransactionType.create(type_name: "Deposit")
+TransactionType.create(type_name: "Transfer")
+TransactionType.create(type_name: "Expenditure")
+
 Account.all.each do |acct|
   acct.deposit((rand * 1000).round(2))
 end

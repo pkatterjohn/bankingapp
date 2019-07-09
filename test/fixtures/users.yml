@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+superuser:
+  id: 1
+  login: superuser
+  admin: 2
+  organization_id: 3
+  created_at: 2019-07-09 16:42:30.277797000 Z
+  updated_at: 2019-07-09 16:48:40.389644000 Z
+  first_name: Philip
+  last_name: Katterjohn
+  password_digest: "$2a$12$Z4z1LagXEjswzqf7QyfIMu9jXMSLqaaAnkhI7.j453cKPcf.ZKyNW"
+  remember_digest:
 
-one:
-  login: MyString
-  password: MyString
-  admin: 1
-  Organization_id: 
-
-two:
-  login: MyString
-  password: MyString
-  admin: 1
-  Organization_id: 

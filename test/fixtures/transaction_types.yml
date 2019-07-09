@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+deposit:
+  id: 1
+  type_name: Deposit
+  created_at: 2019-07-09 17:12:58.457545000 Z
+  updated_at: 2019-07-09 17:12:58.457545000 Z
 
-one:
-  type_name: MyString
-
-two:
-  type_name: MyString
