@@ -17,12 +17,13 @@ User.create(first_name: 'Philip', last_name: 'Katterjohn', admin: 2, login: 'sup
 
 #Create Users for Organizations
 organizations = Organization.all
-users = (1..40).to_a
+users = (1..(organizations.length*10)).to_a
 organizations.each do |org|
   users.take(10).each do |user|
     User.create(first_name: "First#{user.to_s}", last_name: "Last#{user.to_s}", admin: 0, login: "User#{user.to_s}", password: "Password#{user.to_s}", organization_id: org.id)
   end
   users = users.drop(10)
+  User.create(first_name: "admin", last_name: "user", admin: 0, login: "#{org.external_id}", password: "Password", organization_id: org.id)
 end
 
 #Create Accounts for each User
@@ -30,3 +31,6 @@ User.all.each do |user|
   user.initialize_accounts
 end
 
+Account.all.each do |acct|
+  acct.deposit((rand * 1000).round(2))
+end

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :admin, presence: true
   belongs_to :organization
+  has_many :accounts, dependent: :destroy
+  has_many :transactions, dependent: :destroy
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, on: :create
