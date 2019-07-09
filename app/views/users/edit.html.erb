@@ -4,7 +4,11 @@
 
 <% if current_user.admin > 0 %>
   <%= link_to 'Show', @user %> |
-  <%= link_to 'Users', users_path %>
+  <% if current_user.admin > 1 %>
+    <%= link_to 'Users', users_path %>
+  <% else %>
+    <%= link_to 'Organization', organization_url(current_user.organization)%>
+  <%end%>
 <% else %>
   <%= link_to 'Cancel', @user %>
 <%end%>

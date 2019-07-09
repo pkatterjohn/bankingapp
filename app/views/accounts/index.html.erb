@@ -2,6 +2,7 @@
 
 <h1>Listing Accounts</h1>
 
+<h2><%= link_to 'Create New Account', new_account_path %></h2>
 <table class="blueTable">
   <thead>
     <tr>
@@ -19,7 +20,7 @@
         <td><%= account.user.first_name %> <%= account.user.last_name%></td>
         <td><%= account.name %></td>
         <td><%= account.account_type %></td>
-        <td>$<%= '%.2f' % account.amount%></td>
+        <td align='right'>$<%= '%.2f' % account.amount%></td>
         <td><%= link_to 'Show', account %></td>
         <td><%= link_to 'Edit', edit_account_path(account) %></td>
         <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -30,4 +31,3 @@
 
 <br>
 
-<%= link_to 'New Account', new_account_path %>

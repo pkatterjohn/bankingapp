@@ -23,7 +23,7 @@
         <td><%= Account.find(transaction.acct_from).name unless transaction.acct_from.nil?%></td>
         <td><%= Account.find(transaction.acct_to).name unless transaction.acct_to.nil?%></td>
         <td><%= transaction.description%></td>
-        <td>$<%= '%.2f' % transaction.transfer_amount%></td>
+        <td align='right'>$<%= '%.2f' % transaction.transfer_amount%></td>
         <td><%= link_to 'Show', transaction %></td>
       </tr>
     <% end %>

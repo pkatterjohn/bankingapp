@@ -12,8 +12,15 @@
   <%= User.where(organization_id: @organization.id).count %>
 </p>
 
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>
+<%= link_to 'Edit', edit_organization_path(@organization) %>
+<% if current_user.admin > 1 %>
+  | <%= link_to 'Back', organizations_path %>
+<%end%>
 
-<%= render(:partial => "organization_users", :local => {:organization => @organization, organization_users: @organization_users}) %>
+<% unless @organization_users.empty? %>
+  <%= render(:partial => "organization_users", :local => {:organization => @organization, organization_users: @organization_users}) %>
+<% else %>
+  <h2> <%=@organization.name %> does not have any Users </h2>
+  <h2><%= link_to "Create a new user for #{@organization.name}", new_user_organization_url %></h2>
+<%end%>
 

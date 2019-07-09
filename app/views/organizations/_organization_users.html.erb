@@ -1,5 +1,6 @@
 <h1> <%= @organization.name %> Users </h1>
 
+<h2><%= link_to "New User for #{@organization.name}", new_user_organization_url %></h2>
 <table class="blueTable">
   <thead>
     <tr>

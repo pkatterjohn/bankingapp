@@ -1,8 +1,26 @@
-<h1>Greetings <%= current_user.name%>
+<h1>Greetings <%= current_user.name%></h1>
 <br><br>
-<%= link_to 'View Profile', current_user %><br>
-<%= link_to 'View Accounts', accounts_user_path %><br>
-<%= link_to 'Transfer', transfer_accounts_path %><br>
-<%= link_to 'Deposit Money', deposit_accounts_path %><br>
-<%= link_to 'Spend Money', expenditure_accounts_path %><br>
+<% if current_user.admin.equal?(2) %>
+  <h1>SUPERUSER MENU</h1>
+  <h2>
+  <%=link_to "Organizations", organizations_path%><br>
+  <%=link_to "Users", users_path%><br>
+  <%=link_to "Accounts", accounts_path%><br>
+  <%=link_to "Transactions", transactions_path%><br>
+  </h2>
+<%end%>
 
+<% if current_user.admin.equal?(1) %>
+  <h1>ADMIN MENU</h1>
+  <h2>
+    <%= link_to "#{current_user.organization.name}", organization_url(current_user.organization)%><br>
+  </h2>
+<%end%>
+<h1>USER MENU</h1>
+<h2>
+  <%= link_to 'View Profile', current_user %><br>
+  <%= link_to 'View Accounts', accounts_user_path %><br>
+  <%= link_to 'Transfer', transfer_accounts_path %><br>
+  <%= link_to 'Deposit Money', deposit_accounts_path %><br>
+  <%= link_to 'Spend Money', expenditure_accounts_path %><br>
+</h2>

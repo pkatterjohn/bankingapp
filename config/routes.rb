@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   resources :transaction_types
   resources :transactions
-  resources :organizations
+  resources :organizations do
+    member do
+      get :new_user
+    end
+  end
 
   resources :accounts do
     collection do

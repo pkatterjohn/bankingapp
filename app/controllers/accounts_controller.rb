@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :get_users, only: [:new]
   before_action :prepare_for_transaction, only: [:transfer, :deposit, :expenditure]
 
   def transfer
@@ -54,7 +55,8 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1.json
   def update
     respond_to do |format|
-      if @account.update(account_params)
+      @account.assign_attributes(account_params)
+      if @account.save
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
       else
@@ -78,6 +80,10 @@ class AccountsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_account
       @account = Account.find(params[:id])
+    end
+
+    def get_users
+      @users_for_select = User.all.collect{|x| ["#{x.name} (#{x.login})", x.id]}
     end
 
     def prepare_for_transaction

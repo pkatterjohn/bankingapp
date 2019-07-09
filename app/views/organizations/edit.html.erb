@@ -2,5 +2,9 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @organization %> |
-<%= link_to 'Back', organizations_path %>
+<% if current_user.admin > 1 %>
+  <%= link_to 'Show', @organization %> |
+  <%= link_to 'Back', organizations_path %>
+<%else%>
+  <%= link_to 'Back', @organization %>
+<%end%>

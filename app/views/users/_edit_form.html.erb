@@ -25,16 +25,18 @@
     <%= f.label :login %><br>
     <%= f.text_field :login %>
   </div>
-  <% if current_user.admin > 0 %>
+  <% if current_user.admin > 0 && !@user.admin.equal?(2)%>
     <div class="field">
       <%= f.label :admin %><br>
       <%= f.number_field :admin %>
     </div>
-    <div class="field">
-      <%= f.label :organization_id %><br>
-      <%= f.select :organization_id, @organizations_for_select %>
-    </div>
-  <% end%>
+    <%if current_user.admin > 1%>
+      <div class="field">
+        <%= f.label :organization_id %><br>
+        <%= f.select :organization_id, @organizations_for_select %>
+      </div>
+    <%end%>
+  <%end%>
   <div class="actions">
     <%= f.submit %>
   </div>

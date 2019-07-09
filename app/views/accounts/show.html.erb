@@ -17,7 +17,7 @@
 
 <p>
   <strong>Amount:</strong>
-  <%= @account.amount %>
+  $<%= '%.2f' % @account.amount%>
 </p>
 
 <%= link_to 'Edit', edit_account_path(@account) %> |

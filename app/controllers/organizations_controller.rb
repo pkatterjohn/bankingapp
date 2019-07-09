@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show, :edit, :update, :destroy]
+  before_action :set_organization, only: [:new_user, :show, :edit, :update, :destroy]
   before_action :get_users, only: [:show]
 
   # GET /organizations
@@ -18,6 +18,9 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new
   end
 
+  def new_user
+    @user = User.new
+  end
   # GET /organizations/1/edit
   def edit
   end

@@ -48,12 +48,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         @user.initialize_accounts
-        if current_user.id != @user.id
+        if current_user.id.equal?(@user.id)
           log_in @user
           flash[:success] = "Welcome to the #{@user.organization.name}!"
           format.html { redirect_to @user }
         else
-          render '/users'
+          format.html { redirect_to (Organization.find(@user.organization_id)) }
         end
       else
         format.html { render :new }
