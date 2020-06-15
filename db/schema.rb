@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 20190709161734) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.string   "account_type"
-    t.float    "amount"
+    t.integer  "user_id",      null: false
+    t.string   "name",         null: false
+    t.string   "account_type", null: false
+    t.float    "amount",       null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -28,20 +28,20 @@ ActiveRecord::Schema.define(version: 20190709161734) do
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
   create_table "organizations", force: :cascade do |t|
-    t.string   "external_id"
+    t.string   "external_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "name"
+    t.string   "name",        null: false
   end
 
   create_table "transaction_types", force: :cascade do |t|
-    t.string   "type_name"
+    t.string   "type_name",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string   "transaction_type"
+    t.string   "transaction_type", null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "acct_from"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20190709161734) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "login"
-    t.integer  "admin"
+    t.string   "login",           null: false
+    t.integer  "admin",           null: false
     t.integer  "organization_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
