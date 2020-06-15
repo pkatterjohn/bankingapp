@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.4
 
 RUN mkdir -p /bankingapp
 WORKDIR /bankingapp
@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y postgresql-client sqlite3 --no-install-
 
 COPY ./Gemfile /bankingapp
 
-RUN bundle install
+RUN gem install rake
+RUN bundle install --path vendor/cache
 Add ./ /bankingapp
 
