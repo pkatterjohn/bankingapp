@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'apitest/getdata'
+
   root 'static_pages#home'
 
 	get '/home', to: 'static_pages#home'

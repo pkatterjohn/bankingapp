@@ -7,6 +7,8 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
   web:
     build: .
     command: bundle exec rails s webrick -b '0.0.0.0'
@@ -18,5 +20,11 @@ services:
       - db
     tty: true
     stdin_open: true
+    networks:
+      - backend
+      - the-net
 volumes:
   pgdata:
+networks:
+  backend:
+  the-net:
