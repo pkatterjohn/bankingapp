@@ -7,7 +7,7 @@ gem 'rails', '4.2.10'
 gem 'pg', '~> 0.20'
 gem 'dotenv-rails'
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '3.3.7'
+gem 'bootstrap-sass', '3.4.1'
 gem 'sass-rails', '~> 5.0'
 
 # User HTTParty for http requests
