@@ -1,5 +1,4 @@
 require_relative '../rails_helper.rb'
-require_relative '../spec_helper.rb'
 
 RSpec.describe Account, :type => :model do
     it "is valid with valid attributes" do
