@@ -3,9 +3,24 @@ class Transaction < ActiveRecord::Base
   validates :transfer_amount, presence: true, numericality: {greater_than: 0}
 
   belongs_to :user
+  # has_one :transaction_category
+  #
+  # after_initialize :init
+  #
+  # def init
+  #   self.transaction_category = TransactionCategory.default()
+  # end
 
   def execute_save
     raise "Accounts must be different" if self.acct_to == self.acct_from
+
+    #Implement check validations before executing
+
+    #Check transfer_amount
+    raise "transfer_amount cannot be nil" if self.transfer_amount == nil
+    raise "transfer_amount cannot be negative" if self.transfer_amount < 0
+    raise "transfer_amount cannot be 0" if self.transfer_amount == 0
+
     self.save if self.execute
   end
 

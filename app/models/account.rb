@@ -11,7 +11,7 @@ class Account < ActiveRecord::Base
   end
 
   def deposit(amount)
-    transaction = Transaction.new(transaction_type: "Deposit", transfer_amount: amount.to_f, acct_to: self.id, user_id: self.user_id)
+    transaction = Transaction.new(transaction_type: "Deposit", transfer_amount: amount, acct_to: self.id, user_id: self.user_id)
     transaction.execute_save
   end
 end
