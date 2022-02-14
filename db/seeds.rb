@@ -13,17 +13,17 @@ Organization.create(name: 'Bank of Germany', external_id: 'germanybank')
 Organization.create(name: 'Bank of Japan', external_id: 'japanbank')
 
 #Create SuperUser
-User.create(first_name: 'Philip', last_name: 'Katterjohn', admin: 2, login: 'superuser', password: 'byebuddy', organization_id: Organization.find_by_external_id('superbank').id)
+User.create(first_name: 'Developer', last_name: 'Superuser', admin: 2, login: 'superuser', password: 'byebuddy', organization_id: Organization.find_by_external_id('superbank').id)
 
 #Create Users for Organizations
 organizations = Organization.all
 users = (1..(organizations.length*10)).to_a
 organizations.each do |org|
   users.take(10).each do |user|
-    User.create(first_name: "First#{user.to_s}", last_name: "Last#{user.to_s}", admin: 0, login: "User#{user.to_s}", password: "Password#{user.to_s}", organization_id: org.id)
+    User.create(first_name: "FirstName#{user.to_s}", last_name: "LastName#{user.to_s}", admin: 0, login: "User#{user.to_s}", password: "Password#{user.to_s}", organization_id: org.id)
   end
   users = users.drop(10)
-  User.create(first_name: "admin", last_name: "user", admin: 0, login: "#{org.external_id}", password: "Password", organization_id: org.id)
+  User.create(first_name: "Admin", last_name: "User", admin: 1, login: "#{org.external_id}", password: "Password", organization_id: org.id)
 end
 
 #Create Accounts for each User

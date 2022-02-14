@@ -29,9 +29,9 @@ class User < ActiveRecord::Base
 
   #Initializes Accounts for New User
   def initialize_accounts
-    sav_acct = Account.new(name: "#{self.first_name}'s Savings", user_id: self.id, account_type: "Savings", amount: 20.00)
+    sav_acct = Account.new(name: "#{self.first_name}'s Savings", user_id: self.id, account_type: "Savings")
     sav_acct.save!
-    chk_acct = Account.new(name: "#{self.first_name}'s Checking", user_id: self.id, account_type: "Checking", amount: 20.00)
+    chk_acct = Account.new(name: "#{self.first_name}'s Checking", user_id: self.id, account_type: "Checking")
     chk_acct.save!
   end
 
